@@ -1,0 +1,31 @@
+$class-prefix: "dialog";
+.#{$class-prefix} {
+  & {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: hsla(0, 0%, 50%, 0.8);
+  }
+  &-panel {
+    text-align: inherit;
+    width: 250px;
+    margin-top: 250px;
+    background: #fff;
+    border-radius: 20px;
+    display: inline-block;
+  }
+  &-panel .title,
+  &-panel .button {
+    color: blue;
+    line-height: 45px;
+  }
+  &-panel .content {
+    line-break: auto;
+    min-height: 30px;
+    border-bottom: 1px solid #f5f1f1;
+    padding: 0 10px 15px;
+    font-size: 14px;
+  }
+}
