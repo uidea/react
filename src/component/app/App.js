@@ -1,41 +1,33 @@
 import React from 'react';
-import logo from '../../logo.svg';
-import '../../css/App.css';
 import Example from '../example/Example';
-import Dialog from '../dialog/Dialog';
+import { increment } from "../../actions/exampleAction";
+import { connect } from 'react-redux';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      show: false
-    }
-  }
-  onExampleClick(entry, args) {
-    this.setState({
-      show: true
-    })
+    this.onItemClick = this.onItemClick.bind(this);
   }
 
-  onItemClick(entry, args) {
-    this.setState({
-      show: false
-    })
+  onItemClick = () => {
+    this.props.dispatch(increment())
   }
 
   render() {
-    const entry = {
-      name: 'chris'
-    }
     return (
       <div className="App">
-        <Example text='确定' onClick={this.onExampleClick.bind(this)} show={false} />
-        {this.state.show &&
-          <Dialog onClick={this.onItemClick.bind(this)} />
-        }
+        <Example text='增加' onClick={this.onItemClick} />
+        <p>{this.props.number}</p>
+        <button onClick={() => this.props.dispatch({ type: 'INCREMENT_ASYNC' })} >异步增加</button>
+        <p>{this.props.name}</p>
       </div>
     )
   }
 }
 
-export default App;
+export default connect(
+  state => ({
+    number: state.number,
+    name: state.name
+  })
+)(App);
